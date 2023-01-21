@@ -20,21 +20,18 @@ function getInitArr(str) {
   //   }
 }
 
-const initArr = getInitArr(str);
-let mapOfEmpties = new Map();
-let mapOfFull = new Map();
-function mapset(str) {
+let initArr = getInitArr(str);
+
+function getInitMapOfEmpties(initArr) {
+  let initMapOfEmpties = new Map();
   for (let i = 0; i < initArr.length; i += 1) {
     for (let j = 0; j < initArr[i].length; j += 1) {
       if (initArr[i][j] === '-') {
-        mapOfEmpties.set([i, j], '-')
-        mapOfFull.set([i, j], '-')
-      } else {
-
-      }  ?
-
+        initMapOfEmpties.set([i, j], '-');
+      }
     }
   }
-
+  return initMapOfEmpties;
 }
 console.table(mapOfEmpties(str));
+
