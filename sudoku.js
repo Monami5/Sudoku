@@ -20,7 +20,7 @@ function isSolved(board) {
  * Подумай, как симпатичнее сформировать эту строку.
  */
 function prettyBoard(board) {
-
+  let res = board.map(el => el.join('  ')).join('\n');
 }
 
 // Экспортировать функции для использования в другом файле (например, readAndSolve.js).
