@@ -33,5 +33,15 @@ function getInitMapOfEmpties(initArr) {
   }
   return initMapOfEmpties;
 }
+
+function doesLineIncludesNumber(arr, num, [i, j]) {
+  let line = arr[i];
+line.forEach(el => {
+  if (el === num) return true;
+});
+return false;
+}
+
+
 console.table(mapOfEmpties(str));
 
