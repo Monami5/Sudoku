@@ -36,12 +36,23 @@ function getInitMapOfEmpties(initArr) {
 
 function doesLineIncludesNumber(arr, num, [i, j]) {
   let line = arr[i];
-line.forEach(el => {
-  if (el === num) return true;
-});
-return false;
+  line.forEach(el => {
+    if (el === num) return true;
+  });
+  return false;
 }
 
+function doesRowIncludesNumber(arr, num, [i, j]) {
+  function getRow(arr, [i, j]) {
+    let rowSet = new Set();
+    for (let n = 0; n < arr.length; n += 1) {
+      rowSet.add(arr[n][j]);
+    }
+    return rowSet;
+  }
+  return getRow(arr, [i, j]).has(num) ? true : false;
+}
 
-console.table(mapOfEmpties(str));
+console.table(getInitArr(str));
+console.log(doesRowIncludesNumber(getInitArr(str), '1', [0, 1]));
 
