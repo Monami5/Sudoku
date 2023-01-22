@@ -89,6 +89,7 @@ function solve(boardString) {
       return true;
     }
 
+    // console.log('------------------------------');
     for (let i = 1; i < size + 1; i += 1) {
       const currentNumber = Number(i);
       const isValid = test(currentNumber, currentPosition, newArr);
@@ -137,7 +138,32 @@ function isSolved(newArr) {
  * Возвращает строку с игровым полем для последующего вывода в консоль.
  * Подумай, как симпатичнее сформировать эту строку.
  */
-function prettyBoard(newArr) {}
+function prettyBoard(newArr) {
+  // Вариант №2
+  const prettyBoard = newArr
+    .map((el) => (el = el.join(" ")))
+    .join("\n")
+    .replace(/(\d \d \d) (\d \d \d) (\d \d \d)/g, "| $1 | $2 | $3 |")
+    .replace(/(.+?\n.+?\n.+?\n)/g, "$1-------------------------\n")
+    .replace(/^(.+)/, "-------------------------\n$1")
+    .replace(/(.+)$/, "$1\n-------------------------");
+
+  return prettyBoard;
+}
+
+console.log(
+  prettyBoard([
+    [1, 4, 5, 8, 9, 2, 6, 7, 3],
+    [8, 9, 3, 1, 7, 6, 4, 2, 5],
+    [2, 7, 6, 4, 3, 5, 8, 1, 9],
+    [5, 1, 9, 2, 4, 7, 3, 8, 6],
+    [7, 6, 2, 5, 8, 3, 1, 9, 4],
+    [3, 8, 4, 9, 6, 1, 7, 5, 2],
+    [9, 5, 7, 6, 1, 4, 2, 3, 8],
+    [4, 3, 8, 7, 2, 9, 5, 6, 1],
+    [6, 2, 1, 3, 5, 8, 9, 4, 7],
+  ])
+);
 
 // Экспортировать функции для использования в другом файле (например, readAndSolve.js).
 module.exports = {
