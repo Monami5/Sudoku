@@ -34,7 +34,7 @@ function getInitMapOfEmpties(initArr) {
   return initMapOfEmpties;
 }
 
-function doesLineIncludesNumber(arr, num, [i, j]) {
+function doesLineIncludesNum(arr, num, [i, j]) {
   let line = arr[i];
   line.forEach(el => {
     if (el === num) return true;
@@ -42,7 +42,7 @@ function doesLineIncludesNumber(arr, num, [i, j]) {
   return false;
 }
 
-function doesRowIncludesNumber(arr, num, [i, j]) {
+function doesRowIncludesNum(arr, num, [i, j]) {
   function getRow(arr, [i, j]) {
     let rowSet = new Set();
     for (let n = 0; n < arr.length; n += 1) {
@@ -53,6 +53,23 @@ function doesRowIncludesNumber(arr, num, [i, j]) {
   return getRow(arr, [i, j]).has(num) ? true : false;
 }
 
+function doesSection3on3IncludesNum(arr, num, [i, j]) {
+  /*  Здесь секция - это мини-матрица 3х3. Вся матрица состоит из 9 таких мини-матриц.
+  Для решения задачи мини-матрица также не должна включать повторяющиеся цифры  */
+  function getSection(arr, [i, j]) {
+    let sectionSet = new Set();
+    let lineAddress = (Math.ceil((9 + i + 1) % 9) / 3) - 1;
+    let rowAddress = ((Math.ceil(9 + j + 1) % 9) / 3) - 1;
+    for (let n = 0; n < 3; n += 1) {
+      for (let m = 0; m < 3; n += 1) {
+        sectionSet.add(arr[lineAddress + n][rowAddress + m]);
+      }
+    }
+    return sectionSet;
+  }
+  return getSection(arr, [i, j]).has(num) ? true : false;
+}
+
 console.table(getInitArr(str));
-console.log(doesRowIncludesNumber(getInitArr(str), '1', [0, 1]));
+console.log(doesRowIncludesNumber(getInitArr(str), '8', [0, 1]));
 
