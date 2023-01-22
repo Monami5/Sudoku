@@ -4,7 +4,19 @@ const fs = require("fs");
  * Возвращает игровое поле после попытки его решить.
  * Договорись со своей командой, в каком формате возвращать этот результат.
  */
-function solve(boardString) {}
+function solve(boardString) {
+  let arrayBoardString = [];
+  for (let i = 0; i < boardString.length; i++) {
+    boardString[i] === "-"
+      ? arrayBoardString.push(boardString[i])
+      : arrayBoardString.push(Number(boardString[i]));
+  }
+  let bivarriateArray = [];
+  for (let i = 0; i < arrayBoardString.length - 1; i = i + 9) {
+    bivarriateArray.push(arrayBoardString.slice(i, i + 9));
+  }
+  return bivarriateArray;
+}
 /**
  * Принимает игровое поле в том формате, в котором его вернули из функции solve.
  * Возвращает булевое значение — решено это игровое поле или нет.
