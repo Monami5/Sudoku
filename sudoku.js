@@ -7,15 +7,8 @@ const fs = require("fs");
 
 function solve(boardString) {
   const newStr = boardString.replace(/[-]/gi, 0);
-  // let a = /[\d]{1}/g;
   let arr = newStr.split("").map((i) => Number(i));
   let newArr = [];
-  // arr.map((el, arr) => {
-  //   const index = parseInt(arr.length / 9);
-  //   newArr.push(arr.slice(i, i + 9));
-  //   // i = index /9;
-  //   return newArr;
-  // });
   for (let i = 0; i < arr.length; i += 9) {
     newArr.push(arr.slice(i, i + 9));
   }
@@ -25,20 +18,7 @@ function solve(boardString) {
   // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   // let arrColumns = newArr.map((el,i) => el.map((el2,j) => newArr[j][i]));
-  // console.log (arrColumns)
 
-  // for (let i = 0; i < newArr.length; i += 1) {
-  //   for (let j = 0; j < newArr[i].length; j += 1) {
-  //     if (newArr[i][j] === 0) {
-  //       for (let n = 0; n < numbers.length; n += 1) {
-  //         if (!newArr[i].includes(numbers[n])) {
-  //           newArr[i][j] = numbers[n];
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  // return xy;
   console.log("Двумерный массив 9х9, замена - на нули", newArr);
 
   function findNum(newArr) {
@@ -55,21 +35,21 @@ function solve(boardString) {
   function test(number, position, newArr) {
     const [row, col] = position;
 
-    // Проверка строки
+    // Проверяем строки
     for (let i = 0; i < size; i += 1) {
       if (newArr[i][col] === number && i !== row) {
         return false;
       }
     }
 
-    // Проверка столбца
+    // Проверяем столбцы
     for (let i = 0; i < size; i += 1) {
       if (newArr[row][i] === number && i !== col) {
         return false;
       }
     }
 
-    // Проверка поля 3x3
+    // Проверяем квадраты 3x3
     const boxRow = Math.floor(row / boardSize) * boardSize;
     const boxCol = Math.floor(col / boardSize) * boardSize;
 
@@ -83,23 +63,23 @@ function solve(boardString) {
     return true;
   }
 
-  function getResult() {
-    const currentPosition = findNum(newArr);
+  function getFinalArr() {
+    const findPosition = findNum(newArr);
 
-    if (currentPosition === null) {
+    if (findPosition === null) {
       return true;
     }
 
     for (let i = 1; i < size + 1; i += 1) {
-      const currentNumber = Number(i);
-      const isValid = test(currentNumber, currentPosition, newArr);
-      // console.log('Текущая позиция:', currentPosition, 'Текущие число:', currentNumber, 'Валидация: ', isValid);
+      const findNumber = Number(i);
+      const testing = test(findNumber, findPosition, newArr);
+      console.log('Искомая позиция:', findPosition, 'Искомое число:', findNumber, 'Проверка: ', testing);
 
-      if (isValid) {
-        const [x, y] = currentPosition;
-        newArr[x][y] = currentNumber;
+      if (testing) {
+        const [x, y] = findPosition;
+        newArr[x][y] = findNumber;
 
-        if (getResult()) {
+        if (getFinalArr()) {
           return true;
         }
 
@@ -109,13 +89,13 @@ function solve(boardString) {
     return false;
   }
 
-  // console.table(board);
-  getResult();
-  // console.table(board);
+  // console.table(newArr);
+  getFinalArr();
+  // console.table(newArr);
   return newArr;
 }
 
-console.log(
+console.table(
   solve(
     "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--"
   )
